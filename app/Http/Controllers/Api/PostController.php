@@ -32,7 +32,7 @@ class PostController extends Controller
     }
 
     public function show($id) {
-        $post = Post::where('id', $id)->with('user.biodata', 'user.photoProfile', 'postUpVotes:id,user_id,post_id', 'comments')->first();
+        $post = Post::where('id', $id)->with('user.biodata', 'user.photoProfile', 'postUpVotes:id,user_id,post_id', 'comments.user.biodata', 'comments.user.photoProfile', 'comments.commentsUpVotes', 'comments.replyComments.user.biodata', 'comments.replyComments.user.photoProfile')->first();
 
         if($post) {
             return new PostResource(true, 'List Detail Data Post', $post);
