@@ -26,7 +26,11 @@ class PortfolioController extends Controller
         if($portfolio) {
             return  new PortfolioResource(true, 'success',  $portfolio);
         }
-        return  new PortfolioResource(false, 'Portfolio Not Found!',  null);
+        return response()->json([
+            'status' => false,
+            'message' => 'Portfolio Not Found!',
+            'data' => null
+        ], 404);
     }
 
     public function store(Request $request) {

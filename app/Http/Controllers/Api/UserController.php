@@ -26,7 +26,11 @@ class UserController extends Controller
             return new UserResource(true, 'User Detail Sucessfully', $user);
         }
 
-        return new UserResource(false, 'User Not Found!', null);
+        return response()->json([
+            'status' => false,
+            'message' => 'User Not Found',
+            'data' => null
+        ], 404);
     }
 
     public function profile() {

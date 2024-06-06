@@ -59,7 +59,11 @@ class BiodataController extends Controller
             return new BiodataResource(true, 'Success',  $biodata);
         }
 
-        return new BiodataResource(false, 'Biodata Not Found!',  null);
+        return response()->json([
+            'status' => false,
+            'message' => 'Biodata Not Found!',
+            'data' => null
+        ], 404);
 
     }
 

@@ -35,7 +35,7 @@ class BackgroundPhotoController extends Controller
     {
         $user = Auth::user();
         $validator = Validator::make($request->all(), [
-            'background_photo' => 'image|mimes:png,jpg,jpeg|max:2000',
+            'background_photo' => 'required|image|mimes:png,jpg,jpeg|max:2000',
         ]);
 
         if ($validator->fails()) {

@@ -10,6 +10,8 @@ class Post extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     public function comments() {
         return $this->hasMany(Comment::class);
     }
@@ -24,7 +26,7 @@ class Post extends Model
 
     public function image(): Attribute {
         return Attribute::make(
-            get: fn($image) => url('/storage/posts/'. $image),
+            get: fn($image) => $image != null ?  url('/storage/posts/'. $image) : null,
         );
     }
 }
