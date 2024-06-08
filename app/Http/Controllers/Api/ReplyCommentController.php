@@ -66,7 +66,7 @@ class ReplyCommentController extends Controller
         ]);
     }
 
-    public function update(Request $request, Comment $reply_comment)
+    public function update(Request $request, ReplyComment $reply_comment)
     {
         $comment = Comment::where('id', $request->comment_id)->first();
 
@@ -82,7 +82,7 @@ class ReplyCommentController extends Controller
 
             $reply_comment->update([
                 'content' => $request->content,
-                'comment_id' => $request->post_id,
+                'comment_id' => $request->comment_id,
                 'user_id' => auth()->guard('api')->user()->id
             ]);
 
@@ -98,7 +98,7 @@ class ReplyCommentController extends Controller
         ], 404);
     }
 
-    public function destroy(Comment $reply_comment) {
+    public function destroy(ReplyComment $reply_comment) {
         if($reply_comment->delete()) {
             return new ReplyCommentResource(true, 'Reply Comment Sucessfull Deleted', null);
         }

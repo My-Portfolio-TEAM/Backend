@@ -67,14 +67,14 @@ class BackgroundPhotoController extends Controller
         }
 
         if ($request->hasFile('background_photo')) {
-            $backgroundPhoto = $request->file('background_photo');
 
             Storage::disk('local')->delete('public/backgroundPhotos/' . basename($background->background_photo));
 
-            $backgroundPhotoPath = $backgroundPhoto->storeAs('public/backgroundPhotos', 'background-' . Str::slug($user->name) . '-' . $backgroundPhoto->hashName());
+            $backgroundPhoto = $request->file('background_photo');
+            $backgroundPhoto->storeAs('public/backgroundPhotos', 'background-' . Str::slug($user->name) . '-' . $backgroundPhoto->hashName());
 
             $background->update([
-                'background_photo' => $backgroundPhotoPath,
+                'background_photo' => 'background-' . Str::slug($user->name) . '-' . $backgroundPhoto->hashName(),
                 'user_id' => auth()->guard('api')->user()->id,
             ]);
 

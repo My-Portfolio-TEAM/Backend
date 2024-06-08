@@ -64,14 +64,14 @@ class PhotoProfileController extends Controller
         }
 
         if ($request->hasFile('photo_profile')) {
-            $photoProfile = $request->file('photo_profile');
 
             Storage::disk('local')->delete('public/photoProfiles/' . basename($photo->photo_profile));
 
-            $photoProfilePath = $photoProfile->storeAs('public/photoProfiles', Str::slug($user->name) . '-' . $photoProfile->hashName());
+            $photoProfile = $request->file('photo_profile');
+            $photoProfile->storeAs('public/photoProfiles', Str::slug($user->name) . '-' . $photoProfile->hashName());
 
             $photo->update([
-                'photo_profile' => $photoProfilePath,
+                'photo_profile' =>  Str::slug($user->name) . '-' . $photoProfile->hashName(),
                 'user_id' => auth()->guard('api')->user()->id,
             ]);
 

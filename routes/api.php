@@ -61,3 +61,7 @@ Route::group(['middleware' => 'auth:api'], function() {
 
 
 });
+
+//public
+
+Route::get('/public/posts', [PostController::class, 'index']);
