@@ -37,6 +37,9 @@ Route::group(['middleware' => 'auth:api'], function() {
     //see my posts
     Route::get('/my-posts',[PostController::class, 'myPosts']);
 
+    //see my postfolios
+    Route::get('/my-portfolios',[PortfolioController::class, 'myPortfolios']);
+
     //logout
     Route::post('/logout', [App\Http\Controllers\Api\Auth\LoginController::class, 'logout']);
 

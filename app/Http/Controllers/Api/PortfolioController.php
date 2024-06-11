@@ -15,7 +15,12 @@ use Illuminate\Support\Facades\Validator;
 class PortfolioController extends Controller
 {
     public function index() {
-        $portfolios = Portfolio::with('user')->latest()->get();
+        $portfolios = Portfolio::with('user.biodata', 'user.photoProfile')->latest()->get();
+
+        return new PortfolioResource(true, 'success', $portfolios);
+    }
+    public function myPortfolios() {
+        $portfolios = Portfolio::with('user.biodata', 'user.photoProfile')->where('user_id', auth()->user()->id)->latest()->get();
 
         return new PortfolioResource(true, 'success', $portfolios);
     }

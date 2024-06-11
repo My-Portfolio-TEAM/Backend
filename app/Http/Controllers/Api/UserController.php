@@ -36,7 +36,7 @@ class UserController extends Controller
     public function profile() {
         $userId = Auth::id();
 
-        $me = User::where('id', $userId)->with('photoProfile', 'backgroundPhoto', 'biodata', 'portfolios', 'posts')->first();
+        $me = User::where('id', $userId)->with('photoProfile', 'backgroundPhoto', 'biodata')->first();
 
         return new UserResource(true, 'Get My Own Profile Success', $me);
 
